@@ -3,11 +3,7 @@
 
 import argparse
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
 import torch.multiprocessing as mp
-from torch.utils.data.sampler import Sampler
-from torchvision import datasets, transforms
 
 from dataset import MyDataset, Flip
 from network import Net

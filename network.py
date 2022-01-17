@@ -1,7 +1,6 @@
 import torch
 from torch import nn
 from torch.nn import functional as F
-import torch.nn.init as init
 
 class Net(nn.Module):
     def __init__(self, dim1, dim2, dim3):

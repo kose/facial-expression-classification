@@ -1,7 +1,5 @@
 import os
 import torch
-import torch.optim as optim
-import torch.nn.functional as F
 from torchvision import transforms
 import numpy as np
 from sklearn.metrics import confusion_matrix
