@@ -7,7 +7,7 @@
 
 - PyTorch
 - torchvision.transform を使ったデータの水増し(Data Argumentation)
-- CUDA環境で自動的にGPUを使用した学習
+- CUDA環境下ではGPUを使用した学習
 - マルチプロセス、並列処理による高速な学習
 - tensorboardによる学習状況閲覧
 

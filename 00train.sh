@@ -5,7 +5,6 @@ cd `dirname $0`
 CDIR=`pwd`
 
 export LANG=C
-export PATH=$HOME/miniforge3/bin:$PATH
 
 
 ##
@@ -14,13 +13,6 @@ do_command()
     echo "\033[32m$1\033[m"
     $1
 }
-
-yes | rm -r logs/dim-*
-yes | rm -r logs/result
-yes | rm -f result/dim-*
-
-# kill `ps ux | grep [Pp]ython | awk '{print $2}'`
-# ps ux
 
 ##
 ## learn  func
@@ -56,7 +48,6 @@ learn()
 ##
 
 PREFIX="dim-"
-
 
 learn "$PREFIX" 16 32 32 100
 learn "$PREFIX" 32 64 64 100
