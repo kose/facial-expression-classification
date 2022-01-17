@@ -58,9 +58,9 @@ learn()
 PREFIX="dim-"
 
 
-# learn "$PREFIX" 16 32 32 100
-# learn "$PREFIX" 32 64 64 100
+learn "$PREFIX" 16 32 32 100
+learn "$PREFIX" 32 64 64 100
 learn "$PREFIX" 64 128 128 100
-# learn "$PREFIX" 128 256 256 100
+learn "$PREFIX" 128 256 256 100
 
 # end

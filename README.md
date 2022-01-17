@@ -11,6 +11,9 @@
 - マルチプロセス、並列処理による高速な学習
 - tensorboardによる学習状況閲覧
 
+![tensorbnoard](tensorboard.png)
+
+
 # データセット
 
 - [データダウンロード](https://signate.jp/competitions/404/data)
@@ -26,16 +29,16 @@ python dataset.py
 ```
 
 
-
 # tensorboardを起動
 
 ```
 ./00server.sh
-
-ブラウザで http://localhost:6006/ を開く
 ```
 
-# トレーニング
+ブラウザで [http://localhost:6006/](http://localhost:6006/) を開く
+
+
+# 学習
 
 ```
 python train.py 
