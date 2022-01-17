@@ -13,6 +13,13 @@
 
 ![tensorbnoard](tensorboard.png)
 
+# Clone
+
+```
+git clone https://github.com/kose/facial-expression-classification.git
+mkdir facial-expression-classification/logs
+mkdir facial-expression-classification/result
+```
 
 # データセット
 
