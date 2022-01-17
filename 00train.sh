@@ -39,7 +39,6 @@ learn()
 
 	do_command "time python train.py --dim1=$DIM1 --dim2=$DIM2 --dim3=$DIM3 --log $LOG --num-processes 6 --epoch $EPOCH"
 	do_command "python test.py --model result/$LOG.pt --csv result/$LOG.csv"
-	do_command "cp result/$LOG.pt result/result.pt"
     fi
 }
 
