@@ -52,3 +52,7 @@ python train.py
 ```
 
 シェルスクリプト 00train.sh を見てください。
+
+# reference
+
+- コードは https://github.com/pytorch/examples/tree/master/mnist_hogwild をベースにしている。

@@ -114,7 +114,6 @@ def train_epoch(rank, epoch, args, model, device, data_loader, optimizer, writer
 
 def test(args, model, device, dataset, dataloader_kwargs):
 
-
     torch.manual_seed(args.seed)
 
     test_loader = torch.utils.data.DataLoader(dataset, **dataloader_kwargs)
