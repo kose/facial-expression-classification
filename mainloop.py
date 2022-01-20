@@ -6,24 +6,19 @@ from sklearn.metrics import confusion_matrix
 
 from torch.utils.tensorboard import SummaryWriter
 
-from dataset import MyDataset, Flip
-
-def train(rank, args, model, device, dataset, dataloader_kwargs):
+def train(rank, args, model, device, kwargs, dataset_larning, dataset_accuracy_train, dataset_accuracy_test):
 
     if rank == 0:
-        writer = SummaryWriter("logs/" + args.log)
-        accuracy_train_dataset = MyDataset(csvfile="train.tsv", flip=Flip.both, transform=False, repeat=1)
-        accuracy_train_loader = torch.utils.data.DataLoader(accuracy_train_dataset, batch_size=10000, shuffle=False)
+        loader_accuracy_train = torch.utils.data.DataLoader(dataset_accuracy_train, batch_size=10000, shuffle=False)
+        loader_accuracy_test = torch.utils.data.DataLoader(dataset_accuracy_test, batch_size=10000, shuffle=False)
 
-        accuracy_test_dataset = MyDataset(csvfile="test.tsv", flip=Flip.both, transform=False, repeat=1)
-        accuracy_test_loader = torch.utils.data.DataLoader(accuracy_test_dataset, batch_size=10000, shuffle=False)
+        writer = SummaryWriter("logs/" + args.log)
     else:
         writer = None
     
     torch.manual_seed(args.seed + rank)
 
-    train_loader = torch.utils.data.DataLoader(dataset, **dataloader_kwargs)
-
+    train_loader = torch.utils.data.DataLoader(dataset_larning, **kwargs)
     
     # optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum)
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
@@ -41,7 +36,7 @@ def train(rank, args, model, device, dataset, dataloader_kwargs):
             ## training
             ##
             with torch.no_grad():
-                data, labels_ground_truth = accuracy_train_loader.__iter__().next()
+                data, labels_ground_truth = loader_accuracy_train.__iter__().next()
                 data = data.to(device)
 
                 labels_ground_truth = labels_ground_truth.numpy().copy()
@@ -62,7 +57,7 @@ def train(rank, args, model, device, dataset, dataloader_kwargs):
             ## testing
             ##
             with torch.no_grad():
-                data, labels_ground_truth = accuracy_test_loader.__iter__().next()
+                data, labels_ground_truth = loader_accuracy_test.__iter__().next()
                 data = data.to(device)
 
                 labels_ground_truth = labels_ground_truth.numpy().copy()
@@ -108,31 +103,6 @@ def train_epoch(rank, epoch, args, model, device, data_loader, optimizer, writer
                 100. * batch_idx / len(data_loader), loss.item()))
             if args.dry_run:
                 break
-
-
-def test(args, model, device, dataset, dataloader_kwargs):
-
-    torch.manual_seed(args.seed)
-
-    test_loader = torch.utils.data.DataLoader(dataset, **dataloader_kwargs)
-
-    model.to("cpu")
-    
-    model.eval()
-
-    with torch.no_grad():
-        data, labels_ground_truth = test_loader.__iter__().next()
-
-        labels_ground_truth = labels_ground_truth.numpy().copy()
-
-        _pred = model(data).numpy().copy()
-        labels_pred = np.argmax(_pred, axis=1)
-
-        result = confusion_matrix(labels_ground_truth, labels_pred)
-        print(result)
-    
-        # import pdb; pdb.set_trace()
-        # print("end")
 
 ### Local Variables: ###
 ### truncate-lines:t ###
