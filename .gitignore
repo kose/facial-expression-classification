@@ -1,5 +1,8 @@
 # Byte-compiled / optimized / DLL files
+.DS_Store
 __pycache__/
+logs
+result
 
 db/sample_submit.csv
 db/test.tsv
@@ -7,3 +10,5 @@ db/train.tsv
 db/train_master.tsv
 db/test
 db/train
+db/test.zip
+db/train.zip
