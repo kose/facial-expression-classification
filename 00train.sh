@@ -1,11 +1,12 @@
 #!/bin/sh
 
+echo "larn: bedin facial-expression-classification: `date`"
+
 #
 cd `dirname $0`
 CDIR=`pwd`
 
 export LANG=C
-
 
 ##
 do_command()
@@ -37,7 +38,9 @@ learn()
 	# cp db/train.tsv db/"$LOG"_train.tsv
 	# cp db/test.tsv db/"$LOG"_test.tsv
 
-	do_command "time python train.py --dim1=$DIM1 --dim2=$DIM2 --dim3=$DIM3 --log $LOG --num-processes 6 --epoch $EPOCH"
+	SEED=`date +%H`
+
+	do_command "time python train.py --dim1=$DIM1 --dim2=$DIM2 --dim3=$DIM3 --log $LOG --num-processes 6 --epoch $EPOCH --seed $SEED"
 	do_command "python test.py --model result/$LOG.pt --csv result/$LOG.csv"
     fi
 }
@@ -52,5 +55,7 @@ learn "$PREFIX" 16 32 32 100
 learn "$PREFIX" 32 64 64 100
 learn "$PREFIX" 64 128 128 100
 learn "$PREFIX" 128 256 256 100
+
+echo "end: bedin facial-expression-classification: `date`"
 
 # end
