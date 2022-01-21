@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "larn: bedin facial-expression-classification: `date`"
+echo "larn: begin facial-expression-classification: `date`"
 
 #
 cd `dirname $0`
@@ -56,6 +56,6 @@ learn "$PREFIX" 32 64 64 100
 learn "$PREFIX" 64 128 128 100
 learn "$PREFIX" 128 256 256 100
 
-echo "end: bedin facial-expression-classification: `date`"
+echo "end: facial-expression-classification: `date`"
 
 # end
